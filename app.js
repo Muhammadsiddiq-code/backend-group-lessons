@@ -25,5 +25,5 @@ app.listen(PORT, () =>
 console.log(`app is running on http://localhost:${PORT} `)
 )
 
-const {UserRouter} = require("./routes/userRoutes")
+const {UserRouter} = require("./routes/userRoute.js")
 app.use("/user", UserRouter)

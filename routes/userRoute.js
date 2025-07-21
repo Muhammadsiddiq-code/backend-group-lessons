@@ -1,5 +1,5 @@
 const { Router } = require("express");
-const { CreateUser } = require("../controllers/usercontroller");
+const { CreateUser } = require("../controller/userController");
 const UserRouter = Router();
 
 UserRouter.post("./createUser", CreateUser)

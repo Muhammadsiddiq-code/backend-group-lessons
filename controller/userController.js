@@ -3,7 +3,7 @@ const { hash } = require("bcrypt");
 const { User } = require("../models/userScheme");
 
 
-const Create = async (req, res) => {
+const CreateUser = async (req, res) => {
     try { 
         const { username, password, firstname, lastname, gender, address, phone} = req.body;
         const oldUser = await User.findOne({ username });
