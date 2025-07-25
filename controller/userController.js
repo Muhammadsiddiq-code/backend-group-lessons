@@ -2,7 +2,7 @@ const { hash } = require("bcrypt");
 
 const { User } = require("../models/userScheme");
 
-
+// create user
 const CreateUser = async (req, res) => {
     try { 
         const { username, password, firstname, lastname, gender, address, phone} = req.body;
@@ -56,7 +56,7 @@ const GetUser = async (req, res) => {
 const GetUserById = async (req, res) => {
     try {
         const usersId = req.params.id;
-        const user = await User.findById(userId)
+        const user = await User.findById(usersId)
         if (!user) {
             return res.status(404).json({ message: "User not found" });
         }
@@ -128,7 +128,7 @@ const deleteUser = async (req, res) => {
 
 
 
-module.exports = { CreateUser, getUser, updateUser, deleteUser }
+module.exports = { CreateUser, GetUserById, updateUser, deleteUser, GetUser }
 
 
 // req => request
