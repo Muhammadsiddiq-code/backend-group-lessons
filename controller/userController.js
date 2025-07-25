@@ -29,7 +29,107 @@ const CreateUser = async (req, res) => {
     }
 };
 
-module.exports = {CreateUser};
+
+
+
+// get user
+const GetUser = async (req, res) => {
+    try {
+        const users = await User.find({});
+        req.json({
+            success: true,
+            massage: "barcha foydalanuchdilar ro'yhati olingan.",
+            innerData: users,
+        })
+    }
+    catch (error) {
+        console.error(error);
+        res.status(500).json({
+            success: false,
+            massage: "server hatosi, Foydalanuchdilar ro'yhati olishda hatolik bo'lgan.",
+
+        });
+    }
+};
+
+
+const GetUserById = async (req, res) => {
+    try {
+        const usersId = req.params.id;
+        const user = await User.findById(userId)
+        if (!user) {
+            return res.status(404).json({ message: "User not found" });
+        }
+        req.json({ massage: "User not found", user })
+    }
+    catch (error) {
+        console.error(error);
+        res.status(500).json({
+            massage: "internal server error",
+        })
+    };
+
+    // ----------------Update users--------------------
+    const updateUser = async (req, res) => {
+        try {
+            const { id } = req.params;
+            const { username, lastname, phone, address } = req.body;
+
+            const updatedUser = await User.findByIdAndUpdate(
+                id,
+                { username, lastname, phone, address },
+                { new: true }
+            );
+
+            if (!updatedUser) {
+                return res.status(404).json({
+                    success: false,
+                    message: "User not found!",
+                });
+            }
+
+            res.json({
+                success: true,
+                message: "User updated successfully!",
+                user: updatedUser,
+            });
+        } catch (error) {
+            res.status(500).json({
+                success: false,
+                message: "Internal Server Error",
+                error: error.message,
+            });
+        }
+    };
+}
+
+// ----------------Delete User--------------------
+const deleteUser = async (req, res) => {
+  try {
+    const userId = req.params.id;
+
+    const deletedUser = await User.findByIdAndDelete(userId);
+
+    if (!deletedUser) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    res.json({ message: "User deleted successfully", deletedUser });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+};
+
+
+
+    
+
+
+
+
+module.exports = { CreateUser, getUser, updateUser, deleteUser }
+
 
 // req => request
 // res => response

@@ -4,5 +4,6 @@ const UserRouter = Router();
 
 UserRouter.post("./createUser", CreateUser)
 
+
 module.exports = { UserRouter }
 
