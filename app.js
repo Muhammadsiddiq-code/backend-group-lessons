@@ -19,11 +19,13 @@ const ConnectionToDB = async () => {
 }
 
 ConnectionToDB();
+const { UserRouter } = require("./routes/userRoute.js")
+app.use("/user", UserRouter)
+
 
 const PORT = process.env.PORT || 3000
 app.listen(PORT, () =>
 console.log(`app is running on http://localhost:${PORT} `)
 )
 
-const {UserRouter} = require("./routes/userRoute.js")
-app.use("/user", UserRouter)
+

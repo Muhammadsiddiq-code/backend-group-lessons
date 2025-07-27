@@ -13,7 +13,7 @@ const CreateUser = async (req, res) => {
             const hashedPassword = await hash(password, 10);
             const newUser = new User({
                 username,
-                password,
+                password: hashedPassword,
                 firstname,
                 lastname,
                 gender,
@@ -35,8 +35,8 @@ const CreateUser = async (req, res) => {
 // get user
 const GetUser = async (req, res) => {
     try {
-        const users = await User.find({});
-        req.json({
+        const users = await User.findOne({});
+        res.json({
             success: true,
             massage: "barcha foydalanuchdilar ro'yhati olingan.",
             innerData: users,
@@ -68,8 +68,9 @@ const GetUserById = async (req, res) => {
             massage: "internal server error",
         })
     };
+}
 
-    // ----------------Update users--------------------
+ // ----------------Update users--------------------
     const updateUser = async (req, res) => {
         try {
             const { id } = req.params;
@@ -101,8 +102,6 @@ const GetUserById = async (req, res) => {
             });
         }
     };
-}
-
 // ----------------Delete User--------------------
 const deleteUser = async (req, res) => {
   try {
