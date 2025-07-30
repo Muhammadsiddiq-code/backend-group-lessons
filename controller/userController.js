@@ -1,6 +1,7 @@
 const { hash } = require("bcrypt");
-
 const { User } = require("../models/userScheme");
+const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt")
 
 // create user
 const CreateUser = async (req, res) => {
