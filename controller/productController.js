@@ -1,13 +1,13 @@
 
-const { User } = require("../models/productScheme");
+const { product } = require("../models/productScheme");
 
 // create product
 const CreateProduct = async (req, res) => {
   try {
     const { name, price, description, image, count} =
       req.body;
-    const oldUser = await User.findOne({ username });
-    if (oldUser) {
+    const oldproduct = await User.findOne({ username });
+    if (oldproduct) {
       res.status(400).json({ message: "User already exist" });
     } else {
       const hashedPassword = await hash(password, 10);
@@ -19,10 +19,10 @@ const CreateProduct = async (req, res) => {
         count
 
       });
-      await newUser.save();
+      await newproduct.save();
       res
         .status(201)
-        .json({ message: "User created successfully", user: newUser });
+        .json({ message: "User created successfully", product: newproduct });
     }
   } catch (error) {
     res.status(500).send(error.message);
@@ -32,11 +32,11 @@ const CreateProduct = async (req, res) => {
 // get user
 const Getproduct = async (req, res) => {
   try {
-    const users = await User.findOne({});
+    const products = await product.findOne({});
     res.json({
       success: true,
       massage: "barcha foydalanuchdilar ro'yhati olingan.",
-      innerData: users,
+      innerData: products,
     });
   } catch (error) {
     console.error(error);
@@ -68,13 +68,13 @@ const Getproduct = async (req, res) => {
 //----------- get User By Id ---------------
 const getProductbyId = async (req, res) => {
   try {
-    const userId = req.params.id;
-    const user = await User.findById(userId);
+    const productId = req.params.id;
+    const product = await User.findById(productId);
 
-    if (!user) {
+    if (!product) {
       return res.status(404).json({ message: "User not found" });
     }
-    res.status(200).json({ message: "User found", user });
+    res.status(200).json({ message: "User found", product });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Internal Server Error" });
@@ -87,13 +87,13 @@ const updateProduct = async (req, res) => {
     const { id } = req.params;
     const { name, price, description, image, count } = req.body;
 
-    const updatedUser = await User.findByIdAndUpdate(
+    const updatedproduct = await product.findByIdAndUpdate(
       id,
       { name, price, description, image, count },
       { new: true }
     );
 
-    if (!updatedUser) {
+    if (!updatedproduct) {
       return res.status(404).json({
         success: false,
         message: "User not found!",
@@ -103,7 +103,7 @@ const updateProduct = async (req, res) => {
     res.json({
       success: true,
       message: "User updated successfully!",
-      user: updatedUser,
+      user: updatedproduct,
     });
   } catch (error) {
     res.status(500).json({
@@ -116,15 +116,15 @@ const updateProduct = async (req, res) => {
 // ----------------Delete User--------------------
 const deleteProduct = async (req, res) => {
   try {
-    const userId = req.params.id;
+    const productId = req.params.id;
 
-    const deletedUser = await User.findByIdAndDelete(userId);
+    const deletedproduct = await product.findByIdAndDelete(productId);
 
-    if (!deletedUser) {
+    if (!deletedproduct) {
       return res.status(404).json({ message: "User not found" });
     }
 
-    res.json({ message: "User deleted successfully", deletedUser });
+    res.json({ message: "User deleted successfully", deletedproduct });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Internal Server Error" });
