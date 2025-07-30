@@ -53,22 +53,40 @@ const GetUser = async (req, res) => {
 };
 
 
-const GetUserById = async (req, res) => {
-    try {
-        const usersId = req.params.id;
-        const user = await User.findById(usersId)
-        if (!user) {
-            return res.status(404).json({ message: "User not found" });
-        }
-        req.json({ massage: "User not found", user })
+// const GetUserById = async (req, res) => {
+//     try {
+//         const usersId = req.params.id;
+//         const user = await User.findById(usersId)
+//         if (!user) {
+//             return res.status(404).json({ message: "User not found" });
+//         }
+//         req.json({ massage: "User not found", user })
+//     }
+//     catch (error) {
+//         console.error(error);
+//         res.status(500).json({
+//             massage: "internal server error",
+//         })
+//     };
+// }
+
+
+//----------- get User By Id ---------------
+const getUserById = async (req, res) => {
+  try {
+    const userId = req.params.id
+    const user = await User.findById(userId)
+
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' })
     }
-    catch (error) {
-        console.error(error);
-        res.status(500).json({
-            massage: "internal server error",
-        })
-    };
+    res.status(200).json({ message: 'User found', user })
+  } catch (error) {
+    console.error(error)
+    res.status(500).json({ message: 'Internal Server Error' })
+  }
 }
+
 
  // ----------------Update users--------------------
     const updateUser = async (req, res) => {
@@ -80,7 +98,7 @@ const GetUserById = async (req, res) => {
                 id,
                 { username, lastname, phone, address },
                 { new: true }
-            );
+            )
 
             if (!updatedUser) {
                 return res.status(404).json({
@@ -122,12 +140,14 @@ const deleteUser = async (req, res) => {
 
 
 
+
+
     
 
 
 
 
-module.exports = { CreateUser, GetUserById, updateUser, deleteUser, GetUser }
+module.exports = { CreateUser, getUserById, updateUser, deleteUser, GetUser };
 
 
 // req => request

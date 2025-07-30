@@ -1,8 +1,18 @@
 const { Router } = require("express");
-const { CreateUser } = require("../controller/userController");
+const {
+  Createproduct,
+  GetProduct,
+  getproductById,
+  updateProduct,
+  deleteProduct,
+} = require("../controller/userController");
 const UserRouter = Router();
 
-UserRouter.post("/createUser", CreateUser)
+UserRouter.post("/createProduct", Createproduct) 
+UserRouter.get("/getproduct", GetProduct)
+UserRouter.get("/getprodictById/:id", getproductById);
+UserRouter.put("/updateproduct/:id", updateProduct);
+UserRouter.delete("/deleteproduct/:id", deleteProduct);
 
 
 
