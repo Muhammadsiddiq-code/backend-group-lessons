@@ -1,18 +1,16 @@
 const { Router } = require("express");
-const {
-  Createproduct,
-  GetProduct,
-  getproductById,
-  updateProduct,
-  deleteProduct,
-} = require("../controller/userController");
 const UserRouter = Router();
+const {
+ CreateUser, getUserById, updateUser, deleteUser, GetUser, postLogin
+} = require("../controller/userController");
 
-UserRouter.post("/createProduct", Createproduct) 
-UserRouter.get("/getproduct", GetProduct)
-UserRouter.get("/getprodictById/:id", getproductById);
-UserRouter.put("/updateproduct/:id", updateProduct);
-UserRouter.delete("/deleteproduct/:id", deleteProduct);
+
+UserRouter.post("/createUser", CreateUser) 
+UserRouter.get("/getUser", GetUser)
+UserRouter.get("/getUserById/:id", getUserById);
+UserRouter.put("/updateUser/:id", updateUser);
+UserRouter.delete("/deleteUser/:id", deleteUser);
+UserRouter.post("/loginUser", postLogin)
 
 
 

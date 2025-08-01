@@ -16,4 +16,4 @@ CarRoute.get("/carGetById/:id", GetCarById)
 CarRoute.put("/carUpdate/:id", updateCar)
 CarRoute.delete("/carDelete/:id", deleteCar)
 
-module.exports = CarRoute
+module.exports = { CarRoute }
