@@ -16,12 +16,6 @@
 
 // module.exports = { ProductRouter };
 
-
-
-
-
-
-
 // routes/productRoute.js
 const { Router } = require("express");
 const {
@@ -36,7 +30,7 @@ const ProductRouter = Router();
 
 ProductRouter.post("/create", CreateProduct);
 ProductRouter.get("/get", Getproduct);
-ProductRouter.get("/get/:id", getProductbyId);
+ProductRouter.get("/getId/:id", getProductbyId);
 ProductRouter.put("/update/:id", updateProduct);
 ProductRouter.delete("/delete/:id", deleteProduct);
 
