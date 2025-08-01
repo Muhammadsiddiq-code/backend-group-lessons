@@ -28,7 +28,7 @@ const {
 
 const ProductRouter = Router();
 
-ProductRouter.post("/create", CreateProduct);
+ProductRouter.post("/constcreate", CreateProduct);
 ProductRouter.get("/get", Getproduct);
 ProductRouter.get("/getId/:id", getProductbyId);
 ProductRouter.put("/update/:id", updateProduct);
