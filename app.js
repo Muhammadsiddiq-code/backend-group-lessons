@@ -69,6 +69,9 @@ const { UserRouter } = require("./routes/userRoute");
 app.use("/user", UserRouter)
 const { ProductRouter } = require("./routes/productRoute");
 app.use("/product", ProductRouter);
+const { CarRoute } = require("./routes/carRoute");
+app.use("/car", CarRoute)
+
 
 
 // Port

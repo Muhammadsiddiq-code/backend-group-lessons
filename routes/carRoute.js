@@ -1,4 +1,5 @@
 const { Router } = require("express")
+const CarRoute = Router()
 
 const {
     CreateCar,
@@ -6,9 +7,8 @@ const {
     GetCarById,
     updateCar,
     deleteCar,
-} = require("../controllers/carController")
+} = require("../controller/carController")
 
-const CarRoute = Router()
 
 CarRoute.post("/carCreate", CreateCar)
 CarRoute.get("/carGet", GetAllCars)

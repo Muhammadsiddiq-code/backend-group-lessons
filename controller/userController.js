@@ -163,6 +163,36 @@ const postLogin = async (req, res) => {
   }
 };
 
+
+
+
+// search user
+const searchUser = async (req, res) => {
+  try {
+    const { query } = req.query;
+
+    if (!query || query !== "string") {
+      return res.status(400).json({ message: "invalid seach required" });
+    }
+
+    const result = await User.find(
+      { firstname: { $regex: query, $options: "i" } },
+      { lastname: {$regex: query, $options: "i" } },
+      { username: {$regex: query, $options: "i" } },
+
+    );
+  } catch (error) {
+    console.error(error, "error");
+    return res.status(500).json({ success: false, message: " Server Error" });
+  }
+};
+  
+
+
+
+
+
+
 module.exports = {
   CreateUser,
   getUserById,
