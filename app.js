@@ -71,6 +71,8 @@ const { ProductRouter } = require("./routes/productRoute");
 app.use("/product", ProductRouter);
 const { CarRoute } = require("./routes/carRoute");
 app.use("/car", CarRoute)
+const { classRoute } = require("./routes/classRoute");
+app.use("/class", classRoute)
 
 
 
