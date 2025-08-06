@@ -16,8 +16,8 @@ const registerValidation = Joi.object({
     jinsi: Joi.string().optional(),
     adress: Joi.string(),
     phone: Joi.string().pattern(/^\+998\d{9}$/),
-    car_id: Joi.string(),
-    house_id: Joi.string()
+    // car_id: Joi.string(),
+    // house_id: Joi.string()
     // edu_id: Joi.string(),
 });
 
@@ -37,8 +37,8 @@ const updateUserValidationScheme = Joi.object({
   jinsi: Joi.string().optional(),
   adress: Joi.string(),
   phone: Joi.string().pattern(/^\+998\d{9}$/),
-  car_id: Joi.string(),
-  house_id: Joi.string(),
+//   car_id: Joi.string(),
+//   house_id: Joi.string(),
 });
 
 module.exports = {

@@ -10,8 +10,29 @@ const {
   searchUser,
 } = require("../controller/userController");
 
+const validateScheme = (scheme) => (req, res, next) => {
+    const validationResult = scheme.validate(req.body,);
+    if (validationResult.error) {
+        return res
+          .status(400)
+          .send( validationResult.error.details[0].message );
+    };
+    next()
+}
+    
+const {
+    registerValidationScheme,
+    updateValidationScheme,
+} = require("../validation/usersValidation");
 
-UserRouter.post("/createUser", CreateUser) 
+
+
+
+UserRouter.post(
+  "/createUser",
+  validateScheme(registerValidationScheme),
+  CreateUser
+); 
 UserRouter.get("/getUser", GetUser)
 UserRouter.get("/getUserById/:id", getUserById);
 UserRouter.put("/updateUser/:id", updateUser);
