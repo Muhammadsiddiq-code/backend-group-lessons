@@ -28,10 +28,41 @@ const {
 
 const ProductRouter = Router();
 
-ProductRouter.post("/constcreate", CreateProduct);
+
+
+
+const validateScheme = (scheme) => (req, res, next) => {
+  const validationResult = scheme.validate(req.body);
+  if (validationResult.error) {
+    return res.status(400).send(validationResult.error.details[0].message);
+  }
+  next();
+};
+
+const {
+  registerProductValidationScheme,
+  updateProductValidationScheme,
+} = require("../validation/productValidation");
+
+ProductRouter.post(
+  "/constcreate",
+  validateScheme(registerProductValidationScheme),
+  CreateProduct
+);
+
+ProductRouter.put(
+  "/update",
+  validateScheme(updateProductValidationScheme),
+  updateProduct
+);
+
+
+
+
+// ProductRouter.post("/constcreate", CreateProduct);
 ProductRouter.get("/get", Getproduct);
 ProductRouter.get("/getId/:id", getProductbyId);
-ProductRouter.put("/update/:id", updateProduct);
+// ProductRouter.put("/update/:id", updateProduct);
 ProductRouter.delete("/delete/:id", deleteProduct);
 
 module.exports = { ProductRouter };

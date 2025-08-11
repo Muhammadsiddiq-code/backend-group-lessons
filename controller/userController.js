@@ -226,10 +226,11 @@ const { User } = require("../models/userScheme");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 
+
 // Create user
 const CreateUser = async (req, res) => {
   try {
-    const { username, password, firstname, lastname, gender, address, phone } =
+    const { username, password, firstname, lastname, gender, address, phone, product_id } =
       req.body;
     const oldUser = await User.findOne({ username });
     if (oldUser) {
@@ -244,6 +245,7 @@ const CreateUser = async (req, res) => {
         gender,
         address,
         phone,
+        product_id,
       });
       await newUser.save();
       res
@@ -277,7 +279,7 @@ const GetUser = async (req, res) => {
 const getUserById = async (req, res) => {
   try {
     const userId = req.params.id;
-    const user = await User.findById(userId);
+    const user = await User.findById(userId).populate("product_id");
 
     if (!user) {
       return res.status(404).json({ message: "User not found" });

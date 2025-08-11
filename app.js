@@ -48,7 +48,12 @@ const cors = require("cors");
 const { connect } = require("mongoose");
 require("dotenv").config();
 
+const SwaggerJsdoc = require("swagger-jsdoc");
+const swaggerUi = require("swagger-ui-express");
+
 const app = express();
+
+
 app.use(express.json());
 app.use(cors());
 
@@ -65,6 +70,9 @@ const ConnectionToDB = async () => {
 ConnectionToDB();
 
 // Routerlar
+
+
+
 const { UserRouter } = require("./routes/userRoute");
 app.use("/user", UserRouter)
 const { ProductRouter } = require("./routes/productRoute");
@@ -73,6 +81,23 @@ const { CarRoute } = require("./routes/carRoute");
 app.use("/car", CarRoute)
 const { classRoute } = require("./routes/classRoute");
 app.use("/class", classRoute)
+
+// Swagger
+
+const swaggerOptions = {
+  swaggerDefinition: {
+    info: {
+      title: "Express API with Swagger",
+      version: "1.0.0",
+      description: "API documentation using Swagger",
+    },
+    servers: [ {
+      url: "http://localhost:3000",
+    },
+  ]
+  },
+  apis: ["./routes"],
+};
 
 
 
